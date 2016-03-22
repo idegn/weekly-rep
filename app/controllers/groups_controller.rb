@@ -1,7 +1,8 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  
+  before_action :valid_user, only: [:edit, :update, :destroy]
+
   # GET /groups
   # GET /groups.json
   def index
@@ -68,12 +69,19 @@ class GroupsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find(params[:id])
-    end
+  def set_group
+    @group = Group.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def group_params
-      params.require(:group).permit(:name, :description, :template)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def group_params
+    params.require(:group).permit(:name, :description, :template)
+  end
+
+  def valid_user
+    unless current_user.group_id == @group.id
+      flash[:alert] = '権限がありません'
+      redirect_to action: 'index'
     end
+  end
 end
