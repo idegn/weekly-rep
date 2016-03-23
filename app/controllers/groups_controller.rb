@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :valid_user, only: [:edit, :update, :destroy]
+  before_action :not_belongs_to_group, only: [:new, :create]
 
   # GET /groups
   # GET /groups.json
@@ -16,10 +17,6 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
-    unless current_user.group_id.nil?
-      flash[:alert] = 'すでにグループに所属済みです'
-      redirect_to action: 'index'
-    end
     @group = Group.new
   end
 
@@ -31,6 +28,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
+    update_reporting_time
 
     respond_to do |format|
       if @group.save && current_user.update({ group_id: @group.id })
@@ -46,6 +44,8 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
+    update_reporting_time
+
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
@@ -75,7 +75,7 @@ class GroupsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def group_params
-    params.require(:group).permit(:name, :description, :template)
+    params.require(:group).permit(:name, :description, :template, :time, :day_of_week)
   end
 
   def valid_user
@@ -83,5 +83,19 @@ class GroupsController < ApplicationController
       flash[:alert] = '権限がありません'
       redirect_to action: 'index'
     end
+  end
+
+  def not_belongs_to_group
+    unless current_user.group_id.nil?
+      flash[:alert] = 'すでにグループに所属済みです'
+      redirect_to action: 'index'
+    end
+  end
+
+  def update_reporting_time
+    hour = group_params['time(4i)']
+    min = group_params['time(5i)']
+    wday = group_params['day_of_week'].to_i
+    @group.make_reporting_time(hour, min, wday)
   end
 end

@@ -1,0 +1,17 @@
+<p>
+  <strong>User:</strong>
+  <%= @weekly_report.user.name %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @weekly_report.content %>
+</p>
+
+<p>
+  <strong>Reporting time:</strong>
+  <%= @weekly_report.reporting_time %>
+</p>
+
+<%= link_to 'Edit', edit_weekly_report_path(@weekly_report) %> |
+<%= link_to 'Back', weekly_reports_path %>

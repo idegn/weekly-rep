@@ -23,6 +23,15 @@
     <%= f.label :template %><br>
     <%= f.text_area :template %>
   </div>
+  <div class="field">
+    <%= f.label :time %><br>
+    <%= f.time_select :time, default: @group.reporting_time %>
+  </div>
+  <div class="field">
+    <%= f.label :day_of_week %><br>
+    <%= f.select :day_of_week, ["日曜","月曜","火曜","水曜","木曜","金曜","土曜"].zip((0..6).to_a),
+    selected: @group.reporting_time.wday %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
