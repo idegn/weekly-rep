@@ -31,7 +31,7 @@ class GroupsController < ApplicationController
     update_reporting_time
 
     respond_to do |format|
-      if @group.save && current_user.update({ group_id: @group.id })
+      if current_user.update({ group: @group })
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
@@ -79,7 +79,7 @@ class GroupsController < ApplicationController
   end
 
   def valid_user
-    unless current_user.group_id == @group.id
+    unless current_user.group == @group
       flash[:alert] = '権限がありません'
       redirect_to action: 'index'
     end

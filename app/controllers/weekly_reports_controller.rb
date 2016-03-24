@@ -16,6 +16,7 @@ class WeeklyReportsController < ApplicationController
   # GET /weekly_reports/new
   def new
     @weekly_report = WeeklyReport.new
+    @weekly_report.make_default(current_user)
   end
 
   # GET /weekly_reports/1/edit
@@ -26,7 +27,7 @@ class WeeklyReportsController < ApplicationController
   # POST /weekly_reports.json
   def create
     @weekly_report = WeeklyReport.new(weekly_report_params)
-    @weekly_report.user_id = current_user.id
+    @weekly_report.user = current_user
 
     respond_to do |format|
       if @weekly_report.save

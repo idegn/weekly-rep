@@ -15,9 +15,9 @@
     <%= f.label :content %><br>
     <%= f.text_area :content %>
   </div>
-  <div class="field">
-    <%= f.label :reporting_time %><br>
-    <%= f.date_select :reporting_time %>
+  <div>
+    Reporting time<br>
+    <%= @weekly_report.reporting_time %>
   </div>
   <div class="actions">
     <%= f.submit %>

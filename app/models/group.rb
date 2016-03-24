@@ -1,4 +1,5 @@
 class Group < ActiveRecord::Base
+  has_many :users
   attr_accessor :time, :day_of_week
   after_initialize :set_default, if: :new_record?
 
