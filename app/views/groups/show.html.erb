@@ -18,5 +18,9 @@
   <%= @group.reporting_time %>
 </p>
 
+<%= form_for current_user, url: users_belongs_to_group_path do |f| %>
+  <%= hidden_field :group, :id %>
+  <%= f.submit "参加する" %>
+<% end %>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :weekly_reports
   resources :groups
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_scope :user do
+    patch 'users/belongs_to_group', to: 'users/registrations#belongs_to_group'
+  end
   get 'home/index'
 
   root to: 'home#index'
