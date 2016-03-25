@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-    update_reporting_time
+    set_reporting_time
 
     respond_to do |format|
       if current_user.update({ group: @group })
@@ -44,7 +44,7 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
-    update_reporting_time
+    set_reporting_time
 
     respond_to do |format|
       if @group.update(group_params)
@@ -92,7 +92,7 @@ class GroupsController < ApplicationController
     end
   end
 
-  def update_reporting_time
+  def set_reporting_time
     hour = group_params['time(4i)']
     min = group_params['time(5i)']
     wday = group_params['day_of_week'].to_i
