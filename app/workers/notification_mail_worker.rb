@@ -5,7 +5,7 @@ class NotificationMailWorker
     groups = Group.where reporting_time: reporting_time
     groups.each do |group|
       group.users.each do |user|
-        # NotificationMailer.notification_mail(user).deliver_later #メール送信
+        NotificationMailer.notification_mail(user).deliver_later #メール送信
         p user.name + "にメールを送りました"
       end
 
