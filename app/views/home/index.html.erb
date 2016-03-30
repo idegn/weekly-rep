@@ -4,7 +4,18 @@
   <%= link_to "Settings", edit_user_registration_path %> |
   <%= link_to "Logout", destroy_user_session_path, method: :delete %> <br>
   <%= link_to "Groups", groups_path %> <br>
-  <%= link_to "Weekly Reports", weekly_reports_path %>
+  <%= link_to "Weekly Reports", weekly_reports_path %> <br><br>
+
+  <% if current_user.wrote_latest_report? %>
+    <%= link_to '週報を書く', new_weekly_report_path %><br>
+  <% end  %>
+  Group: <%= link_to current_user.group.name, current_user.group if current_user.group %>
+  <br>
+  Latest reports:
+  <%= current_user.group&.users&.map(&:weekly_reports) %>
+  <% current_user.group&.users&.each do |user| %>
+    
+  <% end %>
 <% else %>
   <%= link_to "Sign up", new_user_registration_path %> |
   <%= link_to "Login", new_user_session_path %>
