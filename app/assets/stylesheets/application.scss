@@ -1,0 +1,19 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+caption {
+    text-align: left;
+    font-weight: bold;
+}
+
+/* table { */
+/*     table-layout: fixed; */
+/*     width: 400px; */
+/* } */
+
+.report_content{
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

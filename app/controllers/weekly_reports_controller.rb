@@ -28,6 +28,7 @@ class WeeklyReportsController < ApplicationController
   def create
     @weekly_report = WeeklyReport.new(weekly_report_params)
     @weekly_report.user = current_user
+    @weekly_report.group = current_user.group
 
     respond_to do |format|
       if @weekly_report.save

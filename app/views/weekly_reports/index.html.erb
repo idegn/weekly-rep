@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>User</th>
+      <th>Group</th>
       <th>Content</th>
       <th>Reporting time</th>
       <th colspan="3"></th>
@@ -14,6 +15,7 @@
     <% @weekly_reports.each do |weekly_report| %>
       <tr>
         <td><%= weekly_report.user.name %></td>
+	<td><%= weekly_report.group.name %></td>
         <td><%= weekly_report.content %></td>
         <td><%= weekly_report.reporting_time %></td>
         <td><%= link_to 'Show', weekly_report %></td>

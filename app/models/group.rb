@@ -1,5 +1,6 @@
 class Group < ActiveRecord::Base
   has_many :users
+  has_many :weekly_reports
   attr_accessor :time, :day_of_week
   after_initialize :set_default, if: :new_record?
   after_commit 'NotificationMailWorker.set_next_job', on: [:create, :update]

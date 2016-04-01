@@ -9,12 +9,22 @@
   <% if current_user.wrote_latest_report? %>
     <%= link_to '週報を書く', new_weekly_report_path %><br>
   <% end  %>
-  Group: <%= link_to current_user.group.name, current_user.group if current_user.group %>
-  <br>
-  Latest reports:
-  <%= current_user.group&.users&.map(&:weekly_reports) %>
-  <% current_user.group&.users&.each do |user| %>
-    
+  <% if current_user.group %>
+    <% reports = current_user.group.weekly_reports %>
+    <% unless reports.empty? %>
+      <% recent_time = reports.maximum(:reporting_time) %>
+      <table>
+	<caption><%= link_to current_user.group.name, current_user.group %>の直近の週報(<%= recent_time.getlocal %>)</caption>
+	<tbody>
+	  <% reports.where('reporting_time = ?', recent_time).each do |report| %>
+	    <tr>
+	      <td><%= report.user.name %></td>
+	      <td class='report_content'><%= link_to report.content, report %></td>
+	    </tr>
+	  <% end %>
+	</tbody>
+      </table>
+    <% end %>
   <% end %>
 <% else %>
   <%= link_to "Sign up", new_user_registration_path %> |

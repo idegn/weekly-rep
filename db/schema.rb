@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323071158) do
+ActiveRecord::Schema.define(version: 20160330151512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,12 @@ ActiveRecord::Schema.define(version: 20160323071158) do
     t.datetime "reporting_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "group_id"
   end
 
+  add_index "weekly_reports", ["group_id"], name: "index_weekly_reports_on_group_id", using: :btree
   add_index "weekly_reports", ["user_id"], name: "index_weekly_reports_on_user_id", using: :btree
 
+  add_foreign_key "weekly_reports", "groups"
   add_foreign_key "weekly_reports", "users"
 end
