@@ -11,16 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :content %><br>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, class: 'form-control', rows: 20 %>
   </div>
-  <div>
-    Reporting time<br>
-    <%= @weekly_report.reporting_time %>
+  <div class="form-group">
+    <strong>Reporting time:</strong> <%= @weekly_report.reporting_time %>
     <%= f.hidden_field :reporting_time %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions form-group">
+    <%= bs_submit(f) %>
   </div>
 <% end %>

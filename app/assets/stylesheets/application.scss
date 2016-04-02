@@ -5,14 +5,14 @@ caption {
     font-weight: bold;
 }
 
-/* table { */
-/*     table-layout: fixed; */
-/*     width: 400px; */
-/* } */
-
-.report_content{
+.report_content {
     max-width: 300px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.time-select {
+    width: auto;
+    display: inline-block;
 }

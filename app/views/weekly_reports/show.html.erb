@@ -3,10 +3,10 @@
   <%= @weekly_report.user.name %>
 </p>
 
-<p>
+<div>
   <strong>Content:</strong>
-  <%= @weekly_report.content %>
-</p>
+  <%= simple_format @weekly_report.content %>
+</div>
 
 <p>
   <strong>Reporting time:</strong>

@@ -11,28 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: 'form-control', rows: 4 %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :template %><br>
-    <%= f.text_area :template %>
+    <%= f.text_area :template, class: 'form-control', rows: 20 %>
   </div>
-  <div class="field">
+  <div class="field form-group"">
     <%= f.label :time %><br>
-    <%= f.time_select :time, default: @group.reporting_time %>
+    <%= f.time_select :time, { default: @group.reporting_time }, { class: 'form-control time-select' } %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :day_of_week %><br>
     <%= f.select :day_of_week, ["日曜","月曜","火曜","水曜","木曜","金曜","土曜"].zip((0..6).to_a),
-    selected: @group.reporting_time.wday %>
+    {}, { selected: @group.reporting_time.wday, class: 'form-control time-select' } %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions form-group">
+    <%= bs_submit(f) %>
   </div>
 <% end %>
