@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     respond_to do |format|
       if current_user.update({ group: @group })
-        format.html { redirect_to @group, notice: 'グループに所属しました。.' }
+        format.html { redirect_to @group, notice: 'グループに所属しました。' }
       else
         format.html { redirect_to @group }
       end
