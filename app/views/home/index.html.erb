@@ -1,8 +1,6 @@
 <% if user_signed_in? %>
-  <% if current_user.wrote_latest_report? %>
-    <%= link_to '週報を書く', new_weekly_report_path, class: 'btn btn-primary btn-lg' %><br>
-  <% end  %>
   <% if current_user.group %>
+    <%= write_latest_report_btn %>
     <% reports = current_user.group.weekly_reports %>
     <% unless reports.empty? %>
       <% recent_time = reports.maximum(:reporting_time) %>
@@ -11,12 +9,16 @@
 	<tbody>
 	  <% reports.where('reporting_time = ?', recent_time).each do |report| %>
 	    <tr>
+	      <td><%= gravatar_for current_user %></td>
 	      <td><%= report.user.name %></td>
 	      <td class="report_content""><%= link_to report.content, report %></td>
+	      <td class="report_updated_time"><%= report.updated_at %></td>
 	    </tr>
 	  <% end %>
 	</tbody>
       </table>
-    <% end %>
+    <% else %>
+      <h2><%= link_to current_user.group.name, current_user.group %></h2>
+    <% end %>    
   <% end %>
 <% end %>

@@ -12,6 +12,12 @@
   <strong>Reporting time:</strong>
   <%= @weekly_report.reporting_time %>
 </p>
+<p>
+  <strong>Updated time:</strong>
+  <%= @weekly_report.updated_at %>
+</p>
 
-<%= link_to 'Edit', edit_weekly_report_path(@weekly_report) %> |
+<% if @weekly_report.user == current_user %>
+  <%= link_to 'Edit', edit_weekly_report_path(@weekly_report) %> |
+<% end %>
 <%= link_to 'Back', weekly_reports_path %>

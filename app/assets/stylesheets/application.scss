@@ -12,7 +12,15 @@ caption {
     text-overflow: ellipsis;
 }
 
+.report_updated_time {
+    width: 150px;
+}
+
 .time-select {
     width: auto;
     display: inline-block;
+}
+
+.gravatar {
+    width: 50px;
 }

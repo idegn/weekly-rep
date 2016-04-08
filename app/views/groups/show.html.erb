@@ -17,10 +17,14 @@
   <strong>Time:</strong>
   <%= @group.reporting_time %>
 </p>
-
-<%= form_for current_user, url: users_belongs_to_group_path do |f| %>
-  <%= hidden_field :group, :id %>
-  <%= f.submit "参加する" %>
+<% if current_user.group.nil? %>
+  <%= form_for current_user, url: users_belongs_to_group_path do |f| %>
+    <%= hidden_field :group, :id %>
+    <%= f.submit "参加する" %>
+  <% end %>
+<% end %>
+<% if @group == current_user.group %>
+  <%= write_latest_report_btn %><br>
 <% end %>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
