@@ -7,7 +7,7 @@
       <table class="table"">
 	<caption><%= link_to current_user.group.name, current_user.group %>の直近の週報(<%= recent_time.getlocal %>)</caption>
 	<tbody>
-	  <% reports.where('reporting_time = ?', recent_time).each do |report| %>
+	  <% reports.where('reporting_time = ?', recent_time).order('updated_at').reverse.each do |report| %>
 	    <tr>
 	      <!-- <td><%= gravatar_for current_user %></td> ロードがうっといので一時的に-->
 	      <td><%= report.user.name %></td>
