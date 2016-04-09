@@ -9,7 +9,7 @@
 	<tbody>
 	  <% reports.where('reporting_time = ?', recent_time).each do |report| %>
 	    <tr>
-	      <td><%= gravatar_for current_user %></td>
+	      <!-- <td><%= gravatar_for current_user %></td> ロードがうっといので一時的に-->
 	      <td><%= report.user.name %></td>
 	      <td class="report_content""><%= link_to report.content, report %></td>
 	      <td class="report_updated_time"><%= report.updated_at %></td>

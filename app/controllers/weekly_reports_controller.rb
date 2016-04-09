@@ -8,6 +8,16 @@ class WeeklyReportsController < ApplicationController
     @weekly_reports = WeeklyReport.all
   end
 
+  def group_index
+    @weekly_reports = Group.find(params[:group_id]).weekly_reports
+    render action: :index
+  end
+
+  def user_index
+    @weekly_reports = User.find(params[:user_id]).weekly_reports
+    render action: :index
+  end
+
   # GET /weekly_reports/1
   # GET /weekly_reports/1.json
   def show

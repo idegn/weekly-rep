@@ -23,7 +23,16 @@
     <%= f.submit "参加する" %>
   <% end %>
 <% end %>
+<div>
+  <strong>所属ユーザ:</strong>
+  <p>
+    <% @group.users.each do |user| %>
+      <%= link_to user.name, "/users/#{user.id}/weekly_reports" %><br>
+    <% end %>
+  </p>
+</div>
 <% if @group == current_user.group %>
+  <%= link_to 'グループの週報一覧', "/groups/#{@group.id}/weekly_reports" %><br>
   <%= write_latest_report_btn %><br>
 <% end %>
 <%= link_to 'Edit', edit_group_path(@group) %> |

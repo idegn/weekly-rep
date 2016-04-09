@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     patch 'users/belongs_to_group', to: 'users/registrations#belongs_to_group'
   end
   get 'home/index'
+  get 'groups/:group_id/weekly_reports', to: 'weekly_reports#group_index'
+  get 'users/:user_id/weekly_reports', to: 'weekly_reports#user_index'
 
   root to: 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
