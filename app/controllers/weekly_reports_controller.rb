@@ -26,7 +26,7 @@ class WeeklyReportsController < ApplicationController
   # GET /weekly_reports/new
   def new
     @weekly_report = WeeklyReport.new
-    @weekly_report.make_default(current_user)
+    @weekly_report.setup(current_user)
   end
 
   # GET /weekly_reports/1/edit

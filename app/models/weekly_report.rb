@@ -2,7 +2,7 @@ class WeeklyReport < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  def make_default(current_user)
+  def setup(current_user)
     self.reporting_time = current_user.group.reporting_time - 1.week
     self.content = current_user.group.template
   end

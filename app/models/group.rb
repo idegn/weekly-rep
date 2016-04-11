@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
   after_initialize :set_default, if: :new_record?
   after_commit 'NotificationMailWorker.set_next_job', on: [:create, :update]
 
-  def make_reporting_time(hour, min, wday)
+  def set_reporting_time(hour, min, wday)
     now = Time.now
     days = ((7 + wday - now.wday) % 7).days
     self.reporting_time = (Time.local(now.year, now.month, now.day, hour, min) + days)
@@ -20,6 +20,6 @@ class Group < ActiveRecord::Base
   private
 
   def set_default
-    make_reporting_time(18, 0, 0)
+    set_reporting_time(18, 0, 0)
   end
 end

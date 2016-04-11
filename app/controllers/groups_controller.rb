@@ -1,8 +1,8 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :valid_user, only: [:edit, :update, :destroy]
-  before_action :not_belongs_to_group, only: [:new, :create]
+  before_action :validate_group_user, only: [:edit, :update, :destroy]
+  before_action :check_belonging, only: [:new, :create]
 
   # GET /groups
   # GET /groups.json
@@ -78,14 +78,13 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name, :description, :template, :time, :day_of_week)
   end
 
-  def valid_user
-    unless current_user.group == @group
-      flash[:alert] = '権限がありません'
-      redirect_to action: 'index'
-    end
+  def validate_group_user
+    return if current_user.group == @group
+    flash[:alert] = '権限がありません'
+    redirect_to action: 'index'
   end
 
-  def not_belongs_to_group
+  def check_belonging
     unless current_user.group_id.nil?
       flash[:alert] = 'すでにグループに所属済みです'
       redirect_to action: 'index'
@@ -96,6 +95,6 @@ class GroupsController < ApplicationController
     hour = group_params['time(4i)']
     min = group_params['time(5i)']
     wday = group_params['day_of_week'].to_i
-    @group.make_reporting_time(hour, min, wday)
+    @group.set_reporting_time(hour, min, wday)
   end
 end
