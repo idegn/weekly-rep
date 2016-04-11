@@ -1,6 +1,5 @@
 <% if user_signed_in? %>
   <% if current_user.group %>
-    <%= write_latest_report_btn %>
     <% reports = current_user.group.weekly_reports %>
     <% unless reports.empty? %>
       <% recent_time = reports.maximum(:reporting_time) %>
@@ -9,9 +8,9 @@
 	<tbody>
 	  <% reports.where('reporting_time = ?', recent_time).order('updated_at').reverse.each do |report| %>
 	    <tr>
-	      <!-- <td><%= gravatar_for current_user %></td> ロードがうっといので一時的に-->
-	      <td><%= report.user.name %></td>
-	      <td class="report_content""><%= link_to report.content, report %></td>
+	      <td class="gravatar_td"><%= gravatar_for report.user %></td>
+	      <td class="report_content""><%= link_to_users_weekly_reports(report.user) %><br>
+	      <%= link_to report.content, report %></td>
 	      <td class="report_updated_time"><%= report.updated_at %></td>
 	    </tr>
 	  <% end %>

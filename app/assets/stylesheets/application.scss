@@ -1,8 +1,25 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.container {
+    margin-bottom: 80px;
+}
+
 caption {
     font-weight: bold;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+.gravatar,
+td.gravatar_td {
+    width: 50px;
+}
+
+a.user_name {
+    color: #777777;
 }
 
 .report_content {
@@ -19,8 +36,4 @@ caption {
 .time-select {
     width: auto;
     display: inline-block;
-}
-
-.gravatar {
-    width: 50px;
 }

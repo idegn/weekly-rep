@@ -21,17 +21,13 @@
         <td><%= weekly_report.reporting_time %></td>
         <td><%= weekly_report.updated_at %></td>
         <td><%= link_to 'Show', weekly_report %></td>
-        <td>
-	  <% if weekly_report.user == current_user %>
-	    <%= link_to 'Edit', edit_weekly_report_path(weekly_report) %>
-	  <% end  %>
-	</td>
-        <td><%= link_to 'Destroy', weekly_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if weekly_report.user == current_user %>
+	  <td><%= link_to 'Edit', edit_weekly_report_path(weekly_report) %></td>
+	  <td><%= link_to 'Destroy', weekly_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% else %>
+	  <td></td><td></td>
+	<% end  %>	
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= write_latest_report_btn %>
