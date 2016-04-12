@@ -18,7 +18,7 @@ class WeeklyReportsControllerTest < ActionController::TestCase
 
   test "should create weekly_report" do
     assert_difference('WeeklyReport.count') do
-      post :create, weekly_report: { content: @weekly_report.content, reporting_time: @weekly_report.reporting_time, user_id: @weekly_report.user_id }
+      post :create, weekly_report: { content: @weekly_report.content, reported_time: @weekly_report.reported_time, user_id: @weekly_report.user_id }
     end
 
     assert_redirected_to weekly_report_path(assigns(:weekly_report))
@@ -35,7 +35,7 @@ class WeeklyReportsControllerTest < ActionController::TestCase
   end
 
   test "should update weekly_report" do
-    patch :update, id: @weekly_report, weekly_report: { content: @weekly_report.content, reporting_time: @weekly_report.reporting_time, user_id: @weekly_report.user_id }
+    patch :update, id: @weekly_report, weekly_report: { content: @weekly_report.content, reported_time: @weekly_report.reported_time, user_id: @weekly_report.user_id }
     assert_redirected_to weekly_report_path(assigns(:weekly_report))
   end
 

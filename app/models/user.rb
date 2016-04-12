@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   def wrote_latest_report?
     return unless group
-    latest_reporting_time = group.reporting_time - 1.week
-    weekly_reports.maximum('reporting_time') != latest_reporting_time
+    latest_reported_time = group.reporting_time - 1.week
+    weekly_reports.maximum('reported_time') != latest_reported_time
   end
 end

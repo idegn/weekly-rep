@@ -3,9 +3,9 @@
 one:
   user_id: 
   content: MyText
-  reporting_time: 2016-03-23 15:34:22
+  reported_time: 2016-03-23 15:34:22
 
 two:
   user_id: 
   content: MyText
-  reporting_time: 2016-03-23 15:34:22
+  reported_time: 2016-03-23 15:34:22

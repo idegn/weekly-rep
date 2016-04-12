@@ -16,8 +16,8 @@
     <%= f.text_area :content, class: 'form-control', rows: 20 %>
   </div>
   <div class="form-group">
-    <strong>Reporting time:</strong> <%= @weekly_report.reporting_time %>
-    <%= f.hidden_field :reporting_time %>
+    <strong>Reporting time:</strong> <%= @weekly_report.reported_time %>
+    <%= f.hidden_field :reported_time %>
   </div>
   <div class="actions form-group">
     <%= bs_submit(f) %>

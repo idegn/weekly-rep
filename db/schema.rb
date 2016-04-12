@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330151512) do
+ActiveRecord::Schema.define(version: 20160412085615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 20160330151512) do
   create_table "weekly_reports", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "reporting_time"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "reported_time"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "group_id"
   end
 

@@ -1,1 +1,1 @@
-json.extract! @weekly_report, :id, :user_id, :content, :reporting_time, :created_at, :updated_at
+json.extract! @weekly_report, :id, :user_id, :content, :reported_time, :created_at, :updated_at

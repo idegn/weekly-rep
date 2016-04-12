@@ -86,6 +86,6 @@ class WeeklyReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def weekly_report_params
-      params.require(:weekly_report).permit(:user_id, :content, :reporting_time)
+      params.require(:weekly_report).permit(:user_id, :content, :reported_time)
     end
 end
