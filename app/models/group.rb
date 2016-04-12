@@ -7,9 +7,14 @@ class Group < ActiveRecord::Base
 
   def set_reporting_time(hour, min, wday)
     now = Time.now
-    days = ((7 + wday - now.wday) % 7).days
-    self.reporting_time = (Time.local(now.year, now.month, now.day, hour, min) + days)
-    self.reporting_time += 7.days if self.reporting_time < Time.now
+    prev_sunday = (now - now.wday.days).beginning_of_day
+    the_day_of_this_week = prev_sunday.days_since(wday)
+    reporting_time_of_this_week = the_day_of_this_week + hour.hours + min.minutes
+    if reporting_time_of_this_week < Time.now
+      self.reporting_time = reporting_time_of_this_week + 1.week
+    else
+      self.reporting_time = reporting_time_of_this_week
+    end
   end
 
   def update_reporting_time

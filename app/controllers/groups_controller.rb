@@ -92,8 +92,8 @@ class GroupsController < ApplicationController
   end
 
   def set_reporting_time
-    hour = group_params['time(4i)']
-    min = group_params['time(5i)']
+    hour = group_params['time(4i)'].to_i
+    min = group_params['time(5i)'].to_i
     wday = group_params['day_of_week'].to_i
     @group.set_reporting_time(hour, min, wday)
   end
