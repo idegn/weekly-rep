@@ -5,16 +5,16 @@ class WeeklyReportsController < ApplicationController
   # GET /weekly_reports
   # GET /weekly_reports.json
   def index
-    @weekly_reports = WeeklyReport.all
+    @weekly_reports = WeeklyReport.all.includes([:user,:group])
   end
 
   def group_index
-    @weekly_reports = Group.find(params[:group_id]).weekly_reports
+    @weekly_reports = Group.find(params[:group_id]).weekly_reports.includes(:user)
     render action: :index
   end
 
   def user_index
-    @weekly_reports = User.find(params[:user_id]).weekly_reports
+    @weekly_reports = User.find(params[:user_id]).weekly_reports.includes(:group)
     render action: :index
   end
 
