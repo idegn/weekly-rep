@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'groups/:group_id/weekly_reports', to: 'weekly_reports#group_index'
   get 'users/:user_id/weekly_reports', to: 'weekly_reports#user_index'
 
+  post 'weekly_reports/preview', to: 'weekly_reports#preview'
+
   root to: 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

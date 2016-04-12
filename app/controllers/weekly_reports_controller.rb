@@ -33,6 +33,9 @@ class WeeklyReportsController < ApplicationController
   def edit
   end
 
+  def preview
+    render html: Qiita::Markdown::Processor.new.call(params[:content])[:output].to_s.html_safe
+  end
   # POST /weekly_reports
   # POST /weekly_reports.json
   def create

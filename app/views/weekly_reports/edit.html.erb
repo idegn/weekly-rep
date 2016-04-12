@@ -1,3 +1,14 @@
 <h1>Editing Weekly Report</h1>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#form">Form</a></li>
+  <li><a id="preview-tab" data-toggle="tab" href="#preview">Preview</a></li>
+</ul>
 
-<%= render 'form' %>
+<div class="tab-content">
+  <div id="form" class="tab-pane fade in active">
+    <%= render 'form' %>
+  </div>
+  <div id="preview" class="tab-pane fade">
+  </div>
+</div>
+
