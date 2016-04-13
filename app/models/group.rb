@@ -6,15 +6,7 @@ class Group < ActiveRecord::Base
   after_commit 'NotificationMailWorker.set_next_job', on: [:create, :update]
 
   def set_reporting_time(hour, min, wday)
-    now = Time.now
-    prev_sunday = (now - now.wday.days).beginning_of_day
-    the_day_of_this_week = prev_sunday.days_since(wday)
-    reporting_time_of_this_week = the_day_of_this_week + hour.hours + min.minutes
-    if reporting_time_of_this_week < Time.now
-      self.reporting_time = reporting_time_of_this_week + 1.week
-    else
-      self.reporting_time = reporting_time_of_this_week
-    end
+    self.reporting_time = calculate_reporting_time(hour, min, wday)
   end
 
   def update_reporting_time
@@ -26,5 +18,17 @@ class Group < ActiveRecord::Base
 
   def set_default
     set_reporting_time(18, 0, 0)
+  end
+
+  def calculate_reporting_time(hour, min, wday)
+    today = Time.now.beginning_of_day
+    prev_sunday = today - today.wday.days
+    day_of_this_week = prev_sunday.days_since(wday)
+    reporting_time_of_this_week = day_of_this_week + hour.hours + min.minutes
+    if reporting_time_of_this_week < Time.now
+      return reporting_time_of_this_week + 1.week
+    else
+      return reporting_time_of_this_week
+    end
   end
 end
