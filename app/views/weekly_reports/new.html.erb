@@ -1,7 +1,8 @@
 <% if @weekly_report.reported_time < Time.now  %>
   <h1>週報</h1>
 <% else %>
-  <h1>下書き</h1>
+  <h1>直近の週報はすでに書かれています<a class="question-a" href="#" data-toggle="popover" data-placement="bottom" data-content="下のフォームは次回の週報です"><span class="h1-question glyphicon glyphicon-question-sign"></span></a></h1>
 <% end %>
+
 
 <%= render 'form' %>

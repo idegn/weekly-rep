@@ -13,3 +13,5 @@ $ ->
       dataType:  "html"
       success:   (data, status, xhr)   -> $('#preview').html(data)
       error:     (xhr,  status, error) -> alert status
+
+  $('[data-toggle="popover"]').popover()
