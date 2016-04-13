@@ -1,3 +1,7 @@
-<h1>New Weekly Report</h1>
+<% if @weekly_report.reported_time < Time.now  %>
+  <h1>週報</h1>
+<% else %>
+  <h1>下書き</h1>
+<% end %>
 
 <%= render 'form' %>

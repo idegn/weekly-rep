@@ -9,12 +9,12 @@ class WeeklyReportsController < ApplicationController
   end
 
   def group_index
-    @weekly_reports = Group.find(params[:group_id]).weekly_reports.includes(:user)
+    @weekly_reports = Group.find(params[:group_id]).weekly_reports.where(published: true).includes(:user)
     render action: :index
   end
 
   def user_index
-    @weekly_reports = User.find(params[:user_id]).weekly_reports.includes(:group)
+    @weekly_reports = User.find(params[:user_id]).weekly_reports.where(published: true).includes(:group)
     render action: :index
   end
 
@@ -31,17 +31,20 @@ class WeeklyReportsController < ApplicationController
 
   # GET /weekly_reports/1/edit
   def edit
+    render action: :new
   end
 
   def preview
     render html: Qiita::Markdown::Processor.new.call(params[:content])[:output].to_s.html_safe
   end
+
   # POST /weekly_reports
   # POST /weekly_reports.json
   def create
     @weekly_report = WeeklyReport.new(weekly_report_params)
     @weekly_report.user = current_user
     @weekly_report.group = current_user.group
+    @weekly_report.published = true if @weekly_report.reported_time < Time.now
 
     respond_to do |format|
       if @weekly_report.save
@@ -57,6 +60,7 @@ class WeeklyReportsController < ApplicationController
   # PATCH/PUT /weekly_reports/1
   # PATCH/PUT /weekly_reports/1.json
   def update
+    @weekly_report.published = true if @weekly_report.reported_time < Time.now
     respond_to do |format|
       if @weekly_report.update(weekly_report_params)
         format.html { redirect_to @weekly_report, notice: 'Weekly report was successfully updated.' }

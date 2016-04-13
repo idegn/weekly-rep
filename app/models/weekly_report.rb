@@ -3,7 +3,11 @@ class WeeklyReport < ActiveRecord::Base
   belongs_to :group
 
   def setup(current_user)
-    self.reported_time = current_user.group.reporting_time - 1.week
+    if current_user.latest_report_published?
+      self.reported_time = current_user.group.reporting_time
+    else
+      self.reported_time = current_user.group.reporting_time - 1.week
+    end
     self.content = current_user.group.template
   end
 end

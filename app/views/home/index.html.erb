@@ -1,6 +1,6 @@
-<% if @reports %>
+<% if @reports.present? %>
   <table class="table"">
-    <caption><%= link_to current_user.group.name, current_user.group %>の直近の週報(<%= @reports.first.reported_time.getlocal %>)</caption>
+    <caption><%= link_to current_user.group.name, current_user.group %>の直近の週報(<%= @reports.first.reported_time %>)</caption>
     <tbody>
       <% @reports.each do |report| %>
 	<tr>
