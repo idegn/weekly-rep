@@ -7,7 +7,7 @@
 	  <td class="gravatar_td"><%= gravatar_for report.user %></td>
 	  <td class="report_content""><%= link_to_users_weekly_reports(report.user) %><br>
 	    <%= link_to report.content, report %></td>
-	  <td class="report_updated_time"><%= report.updated_at %></td>
+	  <td class="report_time"><%= report.updated_at %></td>
 	</tr>
       <% end %>
     </tbody>

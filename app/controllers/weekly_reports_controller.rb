@@ -9,12 +9,14 @@ class WeeklyReportsController < ApplicationController
   end
 
   def group_index
-    @weekly_reports = Group.find(params[:group_id]).weekly_reports.where(published: true).includes(:user)
+    @group = Group.find(params[:group_id])
+    @weekly_reports = @group.weekly_reports.ordered_reports.includes(:user)
     render action: :index
   end
 
   def user_index
-    @weekly_reports = User.find(params[:user_id]).weekly_reports.where(published: true).includes(:group)
+    @user = User.find(params[:user_id])
+    @weekly_reports = @user.weekly_reports.ordered_reports
     render action: :index
   end
 
