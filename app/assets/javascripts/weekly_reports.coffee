@@ -9,9 +9,9 @@ $ ->
       async:     true
       type:      "POST"
       url:       '/weekly_reports/preview'
-      data:      { 'content' : $('#weekly_report_content').val()}
+      data:      { 'content' : $('.for-preview').val() }
       dataType:  "html"
       success:   (data, status, xhr)   -> $('#preview').html(data)
       error:     (xhr,  status, error) -> alert status
 
-  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="popover"]').popover( trigger: 'hover' )

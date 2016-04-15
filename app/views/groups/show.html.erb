@@ -1,21 +1,20 @@
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @group.name %>
-</p>
+</h1>
 
 <div>
-  <strong>Description:</strong>
+  <strong>説明:</strong>
   <%= simple_format @group.description %>
 </div>
 
 <div>
-  <strong>Template:</strong>
+  <strong>テンプレート:</strong>
   <%= simple_format @group.template %>
 </div>
 
 <p>
-  <strong>Time:</strong>
-  <%= @group.reporting_time %>
+  <strong>報告日時:</strong>
+  毎週<%= t('date.day_names')[@group.reporting_time.wday] %><%= l(@group.reporting_time, format: :time_only) %>
 </p>
 <% if current_user.group.nil? %>
   <%= form_for current_user, url: users_belongs_to_group_path do |f| %>
@@ -23,15 +22,14 @@
     <%= f.submit "参加する" %>
   <% end %>
 <% end %>
-<div>
-  <strong>所属ユーザ:</strong>
-  <p>
-    <% @group.users.each do |user| %>
-      <%= link_to user.name, users_weekly_reports_path(user) %><br>
-    <% end %>
-  </p>
-</div>
+<strong>所属ユーザ:</strong>
+<ul class="user_list">
+  <% @group.users.each do |user| %>
+    <li><%= gravatar_for user %><%= link_to user.name, users_weekly_reports_path(user) %></li>
+  <% end %>
+</ul>
+
 <% if @group == current_user.group %>
   <%= link_to 'グループの週報一覧', groups_weekly_reports_path(@group) %><br>
-  <%= link_to 'Edit', edit_group_path(@group) %>
+  <%= link_to '設定', edit_group_path(@group), class: 'btn btn-primary pull-right' %>
 <% end %>

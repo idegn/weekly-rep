@@ -1,22 +1,18 @@
 <p>
-  <strong>User:</strong>
+  <strong>ユーザ:</strong>
   <%= @weekly_report.user.name %>
 </p>
 
 <div>
-  <strong>Content:</strong>
+  <strong><%= @weekly_report.reported_time %>の週報:</strong>
   <%= Qiita::Markdown::Processor.new.call(@weekly_report.content)[:output].to_s.html_safe %>
 </div>
 
 <p>
-  <strong>Reporting time:</strong>
-  <%= @weekly_report.reported_time %>
-</p>
-<p>
-  <strong>Updated time:</strong>
+  <strong>更新日時:</strong>
   <%= @weekly_report.updated_at %>
 </p>
 
 <% if @weekly_report.user == current_user %>
-  <%= link_to 'Edit', edit_weekly_report_path(@weekly_report) %>
+  <%= link_to '編集', edit_weekly_report_path(@weekly_report), class: 'btn btn-primary pull-right' %>
 <% end %>

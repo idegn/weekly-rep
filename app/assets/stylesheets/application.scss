@@ -39,5 +39,20 @@ a.user_name {
 }
 
 .question-a {
-    color: #333333
+    color: #333333;
+}
+
+#preview {
+    min-height: 200px;
+}
+
+.user_list {
+    padding-left: 0px;
+    list-style: none;
+    li {
+    	margin-bottom: 5px;
+	.gravatar {
+	    padding-right: 8px;
+	}
+    }
 }
