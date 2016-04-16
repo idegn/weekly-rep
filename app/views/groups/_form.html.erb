@@ -35,14 +35,16 @@
     </div>
   </div>
 
-  <div class="field form-group"">
-    <%= f.label '報告時間' %><br>
-    <%= f.time_select :time, { default: @group.reporting_time }, { class: 'form-control time-select' } %>
-  </div>
-  <div class="field form-group">
-    <%= f.label '曜日' %><br>
-    <%= f.select :day_of_week, options_for_select(t('date.day_names').zip((0..6).to_a), @group.reporting_time.wday),
-    {}, class: 'form-control time-select' %>
+  <div class="form-inline">
+    <div class="field form-group">
+      <%= f.label '報告日時' %><br>
+      <%= f.select :day_of_week, options_for_select(t('date.day_names').zip((0..6).to_a), @group.reporting_time.wday),
+	{}, class: 'form-control time-select' %>
+    </div>
+    <div class="field form-group"">
+      <%= f.label '　' %><br>
+      <%= f.time_select :time, { default: @group.reporting_time }, { class: 'form-control time-select' } %>
+    </div>
   </div>
   <div class="actions form-group">
     <%= bs_submit(f) %>

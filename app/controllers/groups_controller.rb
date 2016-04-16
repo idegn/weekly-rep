@@ -75,7 +75,7 @@ class GroupsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def group_params
-    params.require(:group).permit(:name, :description, :template, :time, :day_of_week)
+    params.require(:group).permit(:name, :description, :template)
   end
 
   def validate_group_user
@@ -92,9 +92,9 @@ class GroupsController < ApplicationController
   end
 
   def set_reporting_time
-    hour = group_params['time(4i)'].to_i
-    min = group_params['time(5i)'].to_i
-    wday = group_params['day_of_week'].to_i
+    hour = params[:group]['time(4i)'].to_i
+    min = params[:group]['time(5i)'].to_i
+    wday = params[:group]['day_of_week'].to_i
     @group.set_reporting_time(hour, min, wday)
   end
 end

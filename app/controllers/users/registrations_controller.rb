@@ -3,7 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_account_update_params, only: [:update]
 
   def belongs_to_group
-    @group = Group.find(group_params[:id])
+    @group = Group.find(params[:group][:id])
 
     respond_to do |format|
       if current_user.update({ group: @group })
@@ -69,10 +69,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
-  private
-
-  def group_params
-    params.require(:group).permit(:id)
-  end
 end
