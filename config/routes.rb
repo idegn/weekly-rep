@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     patch 'users/belongs_to_group', to: 'users/registrations#belongs_to_group'
   end
   get 'home/index'
-  get 'groups/:group_id/weekly_reports', to: 'weekly_reports#group_index'
-  get 'users/:user_id/weekly_reports', to: 'weekly_reports#user_index'
+  get 'groups/:group_id/weekly_reports', to: 'weekly_reports#group_index', as: :groups_weekly_reports
+  get 'users/:user_id/weekly_reports', to: 'weekly_reports#user_index', as: :users_weekly_reports
 
   post 'weekly_reports/preview', to: 'weekly_reports#preview'
 
