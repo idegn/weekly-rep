@@ -1,0 +1,15 @@
+<% if @request_users.empty? %>
+  <h1>現在参加希望はありません。</h1>
+<% else %>
+  <h1>参加希望者</h1>  
+  <ul>
+    <% @request_users.each do |user| %>
+      <li><%= user.name %>
+	<%= form_for user, url: groups_approve_request_path do |f| %>
+	  <%= f.hidden_field :id %>
+	  <%= f.submit '承認する', class: 'btn btn-primary' %>
+	<% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

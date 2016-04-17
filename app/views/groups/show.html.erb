@@ -1,35 +1,43 @@
 <h1>
   <%= @group.name %>
 </h1>
-
-<div>
-  <strong>説明:</strong>
-  <%= simple_format @group.description %>
-</div>
-
-<div>
-  <strong>テンプレート:</strong>
-  <%= simple_format @group.template %>
-</div>
-
-<p>
-  <strong>報告日時:</strong>
-  毎週<%= t('date.day_names')[@group.reporting_time.wday] %><%= l(@group.reporting_time, format: :time_only) %>
-</p>
 <% if current_user.group.nil? %>
-  <%= form_for current_user, url: users_belongs_to_group_path do |f| %>
+  <%= form_for current_user, url: users_requests_to_belong_path do |f| %>
     <%= hidden_field :group, :id %>
-    <%= f.submit "参加する" %>
+    <%= f.submit "参加申請する", class: 'btn btn-primary' %>
   <% end %>
+<% elsif !current_user.approved && current_user.group == @group %>
+  <p>参加申請済みです。承認を待ちましょう。</p>
 <% end %>
-<strong>所属ユーザ:</strong>
-<ul class="user_list list-inline">
-  <% @group.users.each do |user| %>
-    <li><%= gravatar_for user %><%= link_to user.name, users_weekly_reports_path(user) %></li>
-  <% end %>
-</ul>
 
-<% if @group == current_user.group %>
-  <%= link_to 'グループの週報一覧', groups_weekly_reports_path(@group) %><br>
-  <%= link_to '設定', edit_group_path(@group), class: 'btn btn-primary pull-right' %>
+<% if current_user.approved && current_user.group == @group %>
+  <div>
+    <strong>説明:</strong>
+    <%= simple_format @group.description %>
+  </div>
+
+  <div>
+    <strong>テンプレート:</strong>
+    <%= simple_format @group.template %>
+  </div>
+
+  <p>
+    <strong>報告日時:</strong>
+    毎週<%= t('date.day_names')[@group.reporting_time.wday] %><%= l(@group.reporting_time, format: :time_only) %>
+  </p>
+  <% unless @request_users.empty?%>
+    <%= link_to '参加希望一覧', groups_requests_path(@group), class: 'btn btn-primary' %><br>
+  <% end %>
+
+  <strong>所属ユーザ:</strong>
+  <ul class="user_list list-inline">
+    <% @users.each do |user| %>
+      <li><%= gravatar_for user %><%= link_to user.name, users_weekly_reports_path(user) %></li>
+    <% end %>
+  </ul>
+
+  <% if @group == current_user.group %>
+    <%= link_to 'グループの週報一覧', groups_weekly_reports_path(@group) %><br>
+    <%= link_to '設定', edit_group_path(@group), class: 'btn btn-primary pull-right' %>
+  <% end %>
 <% end %>

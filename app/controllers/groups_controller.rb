@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :requests_index]
   before_action :authenticate_user!
   before_action :validate_group_user, only: [:edit, :update, :destroy]
   before_action :check_belonging, only: [:new, :create]
@@ -10,9 +10,27 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end
 
+  def requests_index
+    @request_users = @group.users.where(approved: false)
+  end
+
+  def approve_request
+    @user = User.find(params[:user][:id])
+
+    respond_to do |format|
+      if @user.update({ approved: true })
+        format.html { redirect_to groups_requests_path(@user.group), notice: "#{@user.name}が#{@user.group.name}に参加しました。" }
+      else
+        format.html { redirect_to groups_requests_path(@user.group) }
+      end
+    end
+  end
+
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @users = @group.belonging_users
+    @request_users = @group.users.where(approved: false)
   end
 
   # GET /groups/new

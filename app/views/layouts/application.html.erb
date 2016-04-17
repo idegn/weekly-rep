@@ -23,14 +23,16 @@
 	  <% if current_user.group %>
 	    <li><%= link_to current_user.group.name, current_user.group %></li>
 	  <% end %>
-	  <% if current_user.latest_report_published? %>
-	    <% next_draft = current_user.next_draft %>
-	    <% path = next_draft ? edit_weekly_report_path(next_draft) : new_weekly_report_path %>
-	    <li><%= link_to "週報を書く", path %></li>
-	  <% else %>
-	    <% latest_draft = current_user.latest_draft %>
-	    <% path = latest_draft ? edit_weekly_report_path(latest_draft) : new_weekly_report_path %>
-	    <li><%= link_to "週報を書く", path %></li>
+	  <% if current_user.approved %>
+	    <% if current_user.latest_report_published? %>
+	      <% next_draft = current_user.next_draft %>
+	      <% path = next_draft ? edit_weekly_report_path(next_draft) : new_weekly_report_path %>
+	      <li><%= link_to "週報を書く", path %></li>
+	    <% else %>
+	      <% latest_draft = current_user.latest_draft %>
+	      <% path = latest_draft ? edit_weekly_report_path(latest_draft) : new_weekly_report_path %>
+	      <li><%= link_to "週報を書く", path %></li>
+	    <% end %>
 	  <% end %>
 	  <li class="dropdown">
 	    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>

@@ -14,6 +14,10 @@ class Group < ActiveRecord::Base
     self.save
   end
 
+  def belonging_users
+    self.users.where(approved: true)
+  end
+
   private
 
   def set_default

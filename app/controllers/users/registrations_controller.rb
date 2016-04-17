@@ -14,6 +14,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def requests_to_belong
+    @group = Group.find(params[:group][:id])
+
+    respond_to do |format|
+      if current_user.update({ group: @group })
+        format.html { redirect_to @group, notice: "#{@group.name}に参加申請しました。" }
+      else
+        format.html { redirect_to @group }
+      end
+    end
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
