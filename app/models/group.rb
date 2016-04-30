@@ -22,6 +22,10 @@ class Group < ActiveRecord::Base
     self.users.where(approved: false)
   end
 
+  def latest_reported_time
+    self.reporting_time - 1.week
+  end
+
   private
 
   def set_default
