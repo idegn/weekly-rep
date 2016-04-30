@@ -49,7 +49,7 @@ class GroupsController < ApplicationController
     set_reporting_time
 
     respond_to do |format|
-      if current_user.update({ group: @group })
+      if current_user.update({ group: @group, approved: true })
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
