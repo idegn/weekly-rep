@@ -1,12 +1,7 @@
 class WeeklyReportsController < ApplicationController
   before_action :set_weekly_report, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
-  # GET /weekly_reports
-  # GET /weekly_reports.json
-  def index
-    @weekly_reports = WeeklyReport.all.includes([:user,:group])
-  end
+  before_action :check_same_group, only: [:group_index, :user_index]
 
   def group_index
     @group = Group.find(params[:group_id])
@@ -94,4 +89,14 @@ class WeeklyReportsController < ApplicationController
     def weekly_report_params
       params.require(:weekly_report).permit(:user_id, :content, :reported_time)
     end
+
+  def check_same_group
+    group_id = params[:group_id] || User.find(params[:user_id]).group.id
+    group = Group.find(group_id)
+    unless group == current_user.group
+      flash[:alert] = '閲覧権限がありません。'
+      redirect_to controller: :home, action: 'index'
+    end
+  end
+
 end

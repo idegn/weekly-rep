@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :weekly_reports
+  resources :weekly_reports, except: :index
   patch 'groups/approve_request', to: 'groups#approve_request'
   resources :groups
   devise_for :users, controllers: { registrations: 'users/registrations' }
