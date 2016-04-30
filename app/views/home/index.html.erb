@@ -12,13 +12,12 @@
       <% end %>
     </tbody>
   </table>
+<% elsif user_signed_in? %>
+  <% if current_user.group.nil? %>
+    <h1 class="text-center"><%= link_to '新しいグループを作る', new_group_path %></h1>
+  <% else %>
+    <h1 class="text-center"><%= link_to '週報を書こう！', new_weekly_report_path %></h1>
+  <% end %>
 <% else %>
-  <h1 class="text-center"><%= link_to '週報を書こう！', new_weekly_report_path %></h1>
-<% end %>
-<% if user_signed_in? %>
-    <% if current_user.group.nil? %>
-        <h1 class="text-center"><%= link_to '新しいグループを作る', new_group_path %></h1>
-    <% end %>
-<% else %>
-    <h1 class="text-center index-links"><%= link_to "登録", new_user_registration_path %> or <%= link_to "ログイン", new_user_session_path %> or <%= link_to "die", 'https://www.google.co.jp/search?q=%E8%87%AA%E6%AE%BA+%E5%90%8D%E6%89%80&oq=%E8%87%AA%E6%AE%BA+%E5%90%8D%E6%89%80&aqs=chrome..69i57.2318j0j1&sourceid=chrome&ie=UTF-8' %></h1>
+  <h1 class="text-center index-links"><%= link_to "登録", new_user_registration_path %> or <%= link_to "ログイン", new_user_session_path %> or <%= link_to "die", 'https://www.google.co.jp/search?q=%E8%87%AA%E6%AE%BA+%E5%90%8D%E6%89%80&oq=%E8%87%AA%E6%AE%BA+%E5%90%8D%E6%89%80&aqs=chrome..69i57.2318j0j1&sourceid=chrome&ie=UTF-8' %></h1>
 <% end %>
