@@ -18,6 +18,10 @@ class Group < ActiveRecord::Base
     self.users.where(approved: true)
   end
 
+  def request_users
+    self.users.where(approved: false)
+  end
+
   private
 
   def set_default

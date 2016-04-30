@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   end
 
   def requests_index
-    @request_users = @group.users.where(approved: false)
+    @request_users = @group.request_users
   end
 
   def approve_request
@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @users = @group.belonging_users
-    @request_users = @group.users.where(approved: false)
+    @request_users = @group.request_users
   end
 
   # GET /groups/new
