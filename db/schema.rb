@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415004819) do
+ActiveRecord::Schema.define(version: 20160514042213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "weekly_report_id"
+    t.text     "content"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+  add_index "comments", ["weekly_report_id"], name: "index_comments_on_weekly_report_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",           null: false
@@ -59,6 +70,8 @@ ActiveRecord::Schema.define(version: 20160415004819) do
   add_index "weekly_reports", ["group_id"], name: "index_weekly_reports_on_group_id", using: :btree
   add_index "weekly_reports", ["user_id"], name: "index_weekly_reports_on_user_id", using: :btree
 
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "weekly_reports"
   add_foreign_key "weekly_reports", "groups"
   add_foreign_key "weekly_reports", "users"
 end

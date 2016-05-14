@@ -1,6 +1,7 @@
 class WeeklyReport < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
+  has_many :comments
   scope :ordered_reports, -> { where(published: true).order('reported_time DESC') }
 
   def setup(current_user)

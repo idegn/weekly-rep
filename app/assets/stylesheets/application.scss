@@ -22,14 +22,16 @@ a.user_name {
     color: #777777;
 }
 
-.report_content {
+.report_content,
+.comment_content{
     max-width: 300px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.report_time {
+.report_time,
+.comment_time{
     width: 150px;
 }
 

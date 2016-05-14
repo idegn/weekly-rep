@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments, only: :create
   resources :weekly_reports, except: :index
   patch 'groups/approve_request', to: 'groups#approve_request'
   resources :groups

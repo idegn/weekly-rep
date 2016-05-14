@@ -16,3 +16,20 @@
 <% if @weekly_report.user == current_user %>
   <%= link_to '編集', edit_weekly_report_path(@weekly_report), class: 'btn btn-primary pull-right' %>
 <% end %>
+
+<% if @comments %>
+  <table class="table"">
+    <caption>コメント</caption>
+    <tbody>
+      <% @comments.each do |comment| %>
+	<tr>
+	  <td class="gravatar_td"><%= gravatar_for comment.user %></td>
+	  <td class="comment_content""><%= comment.user.name %><br>
+	    <%= comment.content %></td>
+	  <td class="comment_time"><%= comment.updated_at %></td>
+	</tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<%= render 'comments/form', comment: @comment %>

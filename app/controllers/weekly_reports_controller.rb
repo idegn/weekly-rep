@@ -18,6 +18,10 @@ class WeeklyReportsController < ApplicationController
   # GET /weekly_reports/1
   # GET /weekly_reports/1.json
   def show
+    @comment = Comment.new
+    @comment.weekly_report = @weekly_report
+
+    @comments = @weekly_report.comments.includes(:user)
   end
 
   # GET /weekly_reports/new
