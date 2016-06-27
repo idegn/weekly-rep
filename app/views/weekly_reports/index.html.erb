@@ -1,9 +1,12 @@
 <% action_name = controller.action_name %>
+
 <% if action_name == 'group_index'%>
-  <h1><%= @group.name%>の週報</h1>
+  <h1><%= @group.name %>の週報</h1>
 <% elsif action_name == 'user_index'%>
-  <h1><%= @user.name%>の週報</h1>
+  <h1><%= @user.name %>の週報</h1>
 <% end %>
+
+
 <table class="table">
   <thead>
     <tr>
@@ -16,10 +19,10 @@
   <tbody>
     <% @weekly_reports.each do |report| %>
       <tr>
-	<td class="gravatar_td"><%= gravatar_for report.user %></td>
-	<td class="report_content""><%= link_to_users_weekly_reports(report.user) %><br>
-	    <%= link_to report.content, report %></td>
-	<td class="report_time"><%= report.reported_time %></td>
+	      <td class="gravatar_td"><%= gravatar_for report.user %></td>
+	      <td class="report_content"><%= link_to_users_weekly_reports(report.user) %><br>
+	        <%= link_to report.content, report %></td>
+	      <td class="report_time"><%= report.reported_time %></td>
       </tr>
     <% end %>
   </tbody>
