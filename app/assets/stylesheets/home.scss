@@ -1,3 +1,18 @@
-// Place all the styles related to the Home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.sub_element  {
+  .sub_header {
+    font-size: 1.6em;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 5px;
+  }
+
+  .sub_body {
+    .sub_body_elem {
+      padding: 3px 3px 0 3px;
+
+      .min_icon {
+        padding-left: 3px;
+        width: 16px;
+      }
+    }
+  }
+}

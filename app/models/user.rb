@@ -6,6 +6,22 @@ class User < ActiveRecord::Base
   belongs_to :group
   has_many :weekly_reports
 
+  def approved_user?
+    joined_group? && approved?
+  end
+
+  def joined_group?
+    !!group_id
+  end
+
+  def owned_report?(report)
+    self == report.user
+  end
+
+  def reported_this_week?
+    weekly_reports.find_by(reported_time: group.latest_reported_time, published: true)
+  end
+
   def latest_report_published?
     weekly_reports.find_by(reported_time: group.latest_reported_time, published: true)
   end

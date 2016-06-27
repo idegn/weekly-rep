@@ -1,8 +1,19 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
 .container {
-    margin-bottom: 80px;
+  max-width: 1000px;
+}
+
+.nav_restrict {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 caption {
@@ -11,11 +22,6 @@ caption {
 
 td {
     vertical-align: middle !important;
-}
-
-.gravatar,
-td.gravatar_td {
-    width: 50px;
 }
 
 a.user_name {
@@ -69,4 +75,36 @@ textarea {
 
 .index-links a{
     color: black;
+}
+
+.report_list {
+  border: 1px solid #e8e8e8;
+  padding: 30px;
+
+  .report_element {
+    width: 100%;
+    display: block;
+
+    .user_icon {
+      width: 40px;
+      height: 40px;
+      float: left;
+    }
+
+    .report_body  {
+      margin-left: 49px;
+
+      .report_title {
+        margin-top: -1px;
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+      }
+    }
+  }
+  .report_element:not(:first-child) {
+    border-top: 1px solid #e8e8e8;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
 }

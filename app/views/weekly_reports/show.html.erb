@@ -1,35 +1,29 @@
-<p>
-  <strong>ユーザ:</strong>
-  <%= @weekly_report.user.name %>
-</p>
+<div class="report">
+  <div class="report_header">
+    <div class="user_icon"><%= gravatar_for @weekly_report.user %></div>
 
-<div>
-  <strong><%= @weekly_report.reported_time %>の週報:</strong>
-  <%= Qiita::Markdown::Processor.new.call(@weekly_report.content)[:output].to_s.html_safe %>
+    <div class="report_info">
+      <div class="report_user"><%= link_to_users_weekly_reports(@weekly_report.user) %></div>
+      <div class="report_time"><%= @weekly_report.updated_at %></div>
+    </div>
+
+    <% if current_user.owned_report?(@weekly_report) %>
+      <div class="report_edit">
+        <%= link_to '週報を編集', edit_weekly_report_path(@weekly_report), class: 'btn btn-default' %>
+
+      </div>
+    <% end %>
+  </div>
+
+  <div class="report_title">
+    <%= @weekly_report.reported_time.to_s(:report_title) %>の週報
+  </div>
+
+  <div class="report_body">
+    <%= Qiita::Markdown::Processor.new.call(@weekly_report.content)[:output].to_s.html_safe %>
+  </div>
 </div>
 
-<p>
-  <strong>更新日時:</strong>
-  <%= @weekly_report.updated_at %>
-</p>
+<hr />
 
-<% if @weekly_report.user == current_user %>
-  <%= link_to '編集', edit_weekly_report_path(@weekly_report), class: 'btn btn-primary pull-right' %>
-<% end %>
-
-<% if @comments %>
-  <table class="table"">
-    <caption>コメント</caption>
-    <tbody>
-      <% @comments.each do |comment| %>
-	<tr>
-	  <td class="gravatar_td"><%= gravatar_for comment.user %></td>
-	  <td class="comment_content""><%= comment.user.name %><br>
-	    <%= comment.content %></td>
-	  <td class="comment_time"><%= comment.updated_at %></td>
-	</tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-<%= render 'comments/form', comment: @comment %>
+<%= render 'comments', comments: @comments, comment: @comment %>
