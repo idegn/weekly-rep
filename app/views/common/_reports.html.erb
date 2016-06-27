@@ -1,0 +1,5 @@
+<div class="report_list">
+  <% reports.each do |report| %>
+    <%= render partial: "common/report", locals: { report: report } %>
+  <% end %>
+</div>

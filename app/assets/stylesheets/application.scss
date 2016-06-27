@@ -76,3 +76,35 @@ textarea {
 .index-links a{
     color: black;
 }
+
+.report_list {
+  border: 1px solid #e8e8e8;
+  padding: 30px;
+
+  .report_element {
+    width: 100%;
+    display: block;
+
+    .user_icon {
+      width: 40px;
+      height: 40px;
+      float: left;
+    }
+
+    .report_body  {
+      margin-left: 49px;
+
+      .report_title {
+        margin-top: -1px;
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+      }
+    }
+  }
+  .report_element:not(:first-child) {
+    border-top: 1px solid #e8e8e8;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+}
