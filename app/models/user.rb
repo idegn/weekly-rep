@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     !!group_id
   end
 
+  def reported_this_week?
+    weekly_reports.find_by(reported_time: group.latest_reported_time, published: true)
+  end
+
   def latest_report_published?
     weekly_reports.find_by(reported_time: group.latest_reported_time, published: true)
   end
