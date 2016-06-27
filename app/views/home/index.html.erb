@@ -1,9 +1,17 @@
-<div class="report_list">
-  <% if @reports.present? %>
-    <% @reports.each do |report| %>
-      <%= render partial: "report", locals: { report: report } %>
-    <% end  %>
-  <% else %>
-    <h1 class="text-center"><%= link_to '週報を書こう！', new_weekly_report_path %></h1>
-  <% end %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="report_list">
+      <% if @reports.present? %>
+        <% @reports.each do |report| %>
+          <%= render partial: "report", locals: { report: report } %>
+        <% end  %>
+      <% else %>
+        <h1 class="text-center"><%= link_to '週報を書こう！', new_weekly_report_path %></h1>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <%= render partial: "sub", locals: { members: @group_members } %>
+  </div>
 </div>

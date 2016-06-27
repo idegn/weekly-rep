@@ -1,0 +1,12 @@
+<div class="sub_element">
+  <div class="sub_header">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Members
+  </div>
+  <div class="sub_body">
+    <% members.each do |member| %>
+      <div class="sub_body_elem">
+        <%= link_to_users_weekly_reports(member) %>
+      </div>
+    <% end %>
+  </div>
+</div>
