@@ -29,6 +29,8 @@ gem 'foreman'
 gem 'bootstrap-sass'
 gem 'qiita-markdown'
 
+gem 'chronic', '~> 0.10.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
