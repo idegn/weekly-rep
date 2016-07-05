@@ -9,6 +9,7 @@ class NotificationMailWorker
       logger.info "#{user.name}にメールを送りました"
     end
 
+    sleep 1                    # wait at least 1 sec
     object.create_notify_mail
   end
 end

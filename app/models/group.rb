@@ -17,11 +17,11 @@ class Group < ActiveRecord::Base
   end
 
   def latest_report_time
-    ::DateTimeBuilder.new.last_week(report_time, report_wday)
+    ::DateTimeBuilder.new.previous_wday(report_time, report_wday)
   end
 
   def next_report_time
-    ::DateTimeBuilder.new.next_week(report_time, report_wday)
+    ::DateTimeBuilder.new.next_wday(report_time, report_wday)
   end
   alias performing_at next_report_time
 end
