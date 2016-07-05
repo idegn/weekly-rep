@@ -4,12 +4,6 @@ class GroupsController < ApplicationController
   before_action :validate_group_user, only: [:edit, :update, :destroy]
   before_action :check_belonging, only: [:new, :create]
 
-  # GET /groups
-  # GET /groups.json
-  def index
-    @groups = Group.all
-  end
-
   def requests_index
     @request_users = @group.request_users
   end
