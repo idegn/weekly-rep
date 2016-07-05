@@ -16,13 +16,12 @@ class Group < ActiveRecord::Base
     users.where(approved: false)
   end
 
-  def latest_reported_time
+  def latest_report_time
     ::DateTimeBuilder.new.last_week(report_time, report_wday)
   end
 
-  private
-
-  def performing_at
+  def next_report_time
     ::DateTimeBuilder.new.next_week(report_time, report_wday)
   end
+  alias performing_at next_report_time
 end
