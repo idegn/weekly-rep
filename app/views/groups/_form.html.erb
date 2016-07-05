@@ -38,12 +38,12 @@
   <div class="form-inline">
     <div class="field form-group">
       <%= f.label '報告日時' %><br>
-      <%= f.select :day_of_week, options_for_select(t('date.day_names').zip((0..6).to_a), @group.reporting_time.wday),
-	{}, class: 'form-control time-select' %>
+      <%= f.select :report_wday, wday_options(@group.report_wday), {}, class: 'form-control time-select' %>
     </div>
-    <div class="field form-group"">
+
+    <div class="field form-group">
       <%= f.label '　' %><br>
-      <%= f.time_select :time, { default: @group.reporting_time }, { class: 'form-control time-select' } %>
+      <%= f.time_select :report_time, { default: @group.report_time }, { class: 'form-control time-select' } %>
     </div>
   </div>
   <div class="actions form-group">

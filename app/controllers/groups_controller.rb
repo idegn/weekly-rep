@@ -46,7 +46,6 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-    set_reporting_time
 
     respond_to do |format|
       if current_user.update({ group: @group, approved: true })
@@ -62,8 +61,6 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
-    set_reporting_time
-
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
@@ -93,7 +90,7 @@ class GroupsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def group_params
-    params.require(:group).permit(:name, :description, :template)
+    params.require(:group).permit(:name, :description, :template, :report_wday, :report_time)
   end
 
   def validate_group_user
@@ -109,10 +106,4 @@ class GroupsController < ApplicationController
     end
   end
 
-  def set_reporting_time
-    hour = params[:group]['time(4i)'].to_i
-    min = params[:group]['time(5i)'].to_i
-    wday = params[:group]['day_of_week'].to_i
-    @group.set_reporting_time(hour, min, wday)
-  end
 end
