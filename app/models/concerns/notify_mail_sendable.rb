@@ -5,7 +5,7 @@ module NotifyMailSendable
 
   def update_notify_mail
     Sidekiq::ScheduledSet.new.select do |s|
-      s.klass == 'NotificationMailWorker' && s.args == [self.class, id]
+      s.klass == 'NotificationMailWorker' && s.args == [self.class.to_s, id]
     end.each(&:delete)
 
     create_notify_mail
