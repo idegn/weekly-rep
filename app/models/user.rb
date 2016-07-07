@@ -19,19 +19,14 @@ class User < ActiveRecord::Base
   end
 
   def reported_this_week?
-    weekly_reports.find_by(reported_time: group.latest_reported_time, published: true)
-  end
-
-  def latest_report_published?
-    weekly_reports.find_by(reported_time: group.latest_reported_time, published: true)
+    weekly_reports.find_by(reported_time: group.latest_report_time, published: true)
   end
 
   def next_draft
-    next_reporting_time = group.reporting_time
-    weekly_reports.find_by(reported_time: next_reporting_time, published: false)
+    weekly_reports.find_by(reported_time: group.next_report_time, published: false)
   end
 
   def latest_draft
-    weekly_reports.find_by(reported_time: group.latest_reported_time, published: false)
+    weekly_reports.find_by(reported_time: group.latest_report_time, published: false)
   end
 end

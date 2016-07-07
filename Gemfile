@@ -29,6 +29,8 @@ gem 'foreman'
 gem 'bootstrap-sass'
 gem 'qiita-markdown'
 
+gem 'chronic', '~> 0.10.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -41,6 +43,7 @@ gem 'qiita-markdown'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'timecop', '~> 0.8.1'
 end
 
 group :development do

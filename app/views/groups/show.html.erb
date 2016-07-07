@@ -23,7 +23,7 @@
 
   <p>
     <strong>報告日時:</strong>
-    毎週<%= t('date.day_names')[@group.reporting_time.wday] %><%= l(@group.reporting_time, format: :time_only) %>
+    毎週<%= t('date.day_names')[@group.report_wday] %><%= l(@group.report_time, format: :time_only) %>
   </p>
   <% unless @request_users.empty?%>
     <%= link_to '参加希望一覧', groups_requests_path(@group), class: 'btn btn-primary' %><br>

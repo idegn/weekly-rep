@@ -1,46 +1,27 @@
 class Group < ActiveRecord::Base
   has_many :users
   has_many :weekly_reports
-  attr_accessor :time, :day_of_week
-  after_initialize :set_default, if: :new_record?
-  after_commit 'NotificationMailWorker.set_next_job', on: [:create, :update]
 
-  def set_reporting_time(hour, min, wday)
-    self.reporting_time = calculate_reporting_time(hour, min, wday)
-  end
+  include NotifyMailSendable
 
-  def update_reporting_time
-    self.reporting_time += 7.days
-    self.save
-  end
+  after_create :create_notify_mail
+  after_update :update_notify_mail
 
   def belonging_users
-    self.users.where(approved: true)
+    users.where(approved: true)
   end
+  alias mail_received_users belonging_users
 
   def request_users
-    self.users.where(approved: false)
+    users.where(approved: false)
   end
 
-  def latest_reported_time
-    self.reporting_time - 1.week
+  def latest_report_time
+    ::DateTimeBuilder.new.previous_wday(report_time, report_wday)
   end
 
-  private
-
-  def set_default
-    set_reporting_time(18, 0, 0)
+  def next_report_time
+    ::DateTimeBuilder.new.next_wday(report_time, report_wday)
   end
-
-  def calculate_reporting_time(hour, min, wday)
-    today = Time.now.beginning_of_day
-    prev_sunday = today - today.wday.days
-    day_of_this_week = prev_sunday.days_since(wday)
-    reporting_time_of_this_week = day_of_this_week + hour.hours + min.minutes
-    if reporting_time_of_this_week < Time.now
-      return reporting_time_of_this_week + 1.week
-    else
-      return reporting_time_of_this_week
-    end
-  end
+  alias performing_at next_report_time
 end

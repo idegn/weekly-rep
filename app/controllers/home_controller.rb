@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   def index
     @reports = current_user.group.weekly_reports.where(published: true).includes(:user)
     @reports = @reports.where('reported_time > ?', 1.week.ago).order('updated_at DESC')
+    @group_members = current_user.group.users
   end
 
   def do_or_die

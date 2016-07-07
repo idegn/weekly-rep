@@ -1,8 +1,11 @@
 module ApplicationHelper
-
   def bs_submit(f)
     value = params[:action] == 'new' ? '作成' : '更新'
     f.submit value, class: 'btn btn-primary pull-right'
+  end
+
+  def wday_options(default = nil)
+    options_for_select(t('date.day_names').zip((0..6).to_a), default)
   end
 
   def gravatar_for(user, size = 50)
