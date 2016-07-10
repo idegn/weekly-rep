@@ -49,6 +49,7 @@ class WeeklyReportsController < ApplicationController
 
     respond_to do |format|
       if @weekly_report.save
+        current_user.send_write_notification
         format.html { redirect_to @weekly_report, notice: 'Weekly report was successfully created.' }
         format.json { render :show, status: :created, location: @weekly_report }
       else

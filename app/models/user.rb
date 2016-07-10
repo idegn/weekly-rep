@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   def reported_this_week?
     weekly_reports.find_by(reported_time: group.latest_report_time, published: true)
   end
+  alias latest_report reported_this_week?
 
   def next_draft
     weekly_reports.find_by(reported_time: group.next_report_time, published: false)
@@ -28,5 +29,12 @@ class User < ActiveRecord::Base
 
   def latest_draft
     weekly_reports.find_by(reported_time: group.latest_report_time, published: false)
+  end
+
+  def send_write_notification
+    notified_users = Set.new([self]) ^ Set.new(group.users)
+    notified_users.each do |user|
+      NotificationMailer.write_notification(self, user).deliver_later
+    end
   end
 end
