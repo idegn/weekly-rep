@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :group
   has_many :weekly_reports
+  has_many :comments
 
   def approved_user?
     joined_group? && approved?
@@ -31,10 +32,21 @@ class User < ActiveRecord::Base
     weekly_reports.find_by(reported_time: group.latest_report_time, published: false)
   end
 
+  def latest_comment
+    comments.order('created_at DESC').first
+  end
+
   def send_write_notification
     notified_users = Set.new([self]) ^ Set.new(group.users)
     notified_users.each do |user|
       NotificationMailer.write_notification(self, user).deliver_later
+    end
+  end
+
+  def send_comment_notification
+    notified_users = Set.new([self]) ^ Set.new(group.users)
+    notified_users.each do |user|
+      NotificationMailer.comment_notification(self, user).deliver_later
     end
   end
 end

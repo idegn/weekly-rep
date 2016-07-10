@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        current_user.send_comment_notification
         format.html { redirect_to @comment.weekly_report, notice: 'Comment was successfully created.' }
       else
         format.html { redirect_to @comment.weekly_report }

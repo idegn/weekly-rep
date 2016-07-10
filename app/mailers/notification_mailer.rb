@@ -10,4 +10,9 @@ class NotificationMailer < ApplicationMailer
     @write_user = write_user
     mail to: user.email, subject: "#{write_user.name}さんが週報を書きました"
   end
+
+  def comment_notification(comment_user, user)
+    @comment_user = comment_user
+    mail to: user.email, subject: "#{comment_user.name}さんがコメントしました"
+  end
 end
