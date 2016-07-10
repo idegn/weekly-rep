@@ -1,4 +1,4 @@
-<%= @user.group.reporting_time %>になりました。
+<%= @user.group.latest_report_time %>になりました。
 <% latest_draft = @user.latest_draft %>
 <% path = latest_draft ? edit_weekly_report_path(latest_draft) : new_weekly_report_path %>
 https://warm-bayou-20748.herokuapp.com<%= path %>
