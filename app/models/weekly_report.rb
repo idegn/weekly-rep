@@ -5,7 +5,7 @@ class WeeklyReport < ActiveRecord::Base
   scope :ordered_reports, -> { where(published: true).order('reported_time DESC') }
 
   def setup(current_user)
-    if current_user.latest_report_published?
+    if current_user.reported_this_week?
       self.reported_time = current_user.group.reporting_time
     else
       self.reported_time = current_user.group.reporting_time - 1.week
