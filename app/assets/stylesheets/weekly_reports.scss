@@ -32,3 +32,32 @@
     font-size: 1.2em;
   }
 }
+
+.comments {
+  border-top: 1px solid rgba(0, 0, 0, .05);;
+
+  .comment_element {
+    border-radius: 3px;
+    padding: 15px 20px;
+    background-color: #fff;
+    margin-top: 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+    border: 1px solid rgba(0, 0, 0, .09);
+  }
+
+  .user_icon {
+    width: 40px;
+    height: 40px;
+    float: left;
+  }
+
+  .comment_body {
+    margin-left: 50px;
+    height: 50px;
+
+    .comment_time {
+      font-size: 12px;
+      color: #aaa;
+    }
+  }
+}
