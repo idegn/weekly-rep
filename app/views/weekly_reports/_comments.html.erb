@@ -1,17 +1,18 @@
+<h3>Comments</h3>
+
 <% if comments %>
-  <table class="table">
-    <caption>コメント</caption>
-    <tbody>
-      <% comments.each do |comment| %>
-	      <tr>
-	        <td class="gravatar_td"><%= gravatar_for comment.user %></td>
-	        <td class="comment_content"><%= comment.user.name %><br>
-	          <%= comment.content %></td>
-          <td class="comment_time"><%= comment.updated_at %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <% comments.each do |comment| %>
+    <div class="comment_element">
+	    <div class="user_icon"><%= gravatar_for comment.user, 40 %></div>
+
+      <div class="comment_body">
+	      <div class="comment_user"><%= comment.user.name %></div>
+        <div class="comment_time"><%= comment.updated_at %></div>
+      </div>
+
+	    <%= comment.content %>
+    </div>
+  <% end %>
 <% end %>
 
 <%= render 'comments/form', comment: comment %>
