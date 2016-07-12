@@ -1,35 +1,33 @@
-<%= form_for(@weekly_report) do |f| %>
-  <% if @weekly_report.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@weekly_report.errors.count, "error") %> prohibited this weekly_report from being saved:</h2>
+<div class="report_form">
+  <%= form_for(@weekly_report) do |f| %>
+    <% if @weekly_report.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@weekly_report.errors.count, "error") %> prohibited this weekly_report from being saved:</h2>
 
-      <ul>
-      <% @weekly_report.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+          <% @weekly_report.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#form">本文</a></li>
+      <li><a id="preview-tab" data-toggle="tab" href="#preview">プレビュー</a></li>
+    </ul>
+
+    <div class="tab-content report_editor">
+      <div id="form" class="tab-pane fade in active">
+        <%= f.text_area :content, class: 'for-preview report_textarea', placeholder: "Write Your Report Here..."  %>
+      </div>
+
+      <div id="preview" class="tab-pane fade report_preview">
+      </div>
+    </div>
+
+    <div class="actions form-group">
+      <%= bs_submit(f) %>
     </div>
   <% end %>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#form">内容</a></li>
-  <li><a id="preview-tab" data-toggle="tab" href="#preview">プレビュー</a></li>
-</ul>
-
-<div class="tab-content">
-  <div id="form" class="tab-pane fade in active">
-    <div class="field form-group">
-      <%= f.text_area :content, class: 'form-control for-preview', rows: 20 %>
-    </div>
-  </div>
-  <div id="preview" class="tab-pane fade">
-  </div>
 </div>
-  <div class="form-group">
-    <strong>報告日時:</strong> <%= @weekly_report.reported_time %>
-    <%= f.hidden_field :reported_time %>
-  </div>
-  <div class="actions form-group">
-    <%= bs_submit(f) %>
-  </div>
-<% end %>

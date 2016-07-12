@@ -6,14 +6,23 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.container {
+
+.bodyBase {
+  min-height: 100vh !important;
+  background: #fafafa!important;
+}
+
+.container_restrict {
   max-width: 1000px;
 }
 
-.nav_restrict {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+.container_full {
+  min-width: 100%;
+}
+
+.navbar {
+  background: #fff;
+  border-color: rgba(0, 0, 0, .05);
 }
 
 caption {
@@ -22,23 +31,6 @@ caption {
 
 td {
     vertical-align: middle !important;
-}
-
-a.user_name {
-    color: #777777;
-}
-
-.report_content,
-.comment_content{
-    max-width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.report_time,
-.comment_time{
-    width: 150px;
 }
 
 .time-select {
@@ -75,36 +67,4 @@ textarea {
 
 .index-links a{
     color: black;
-}
-
-.report_list {
-  border: 1px solid #e8e8e8;
-  padding: 30px;
-
-  .report_element {
-    width: 100%;
-    display: block;
-
-    .user_icon {
-      width: 40px;
-      height: 40px;
-      float: left;
-    }
-
-    .report_body  {
-      margin-left: 49px;
-
-      .report_title {
-        margin-top: -1px;
-        font-weight: bold;
-        font-size: 18px;
-        width: 100%;
-      }
-    }
-  }
-  .report_element:not(:first-child) {
-    border-top: 1px solid #e8e8e8;
-    padding-top: 8px;
-    margin-top: 8px;
-  }
 }

@@ -1,8 +1,17 @@
-<% if @weekly_report.reported_time < Time.now  %>
-  <h1>週報</h1>
-<% else %>
-  <h1>直近の週報はすでに書かれています<a class="question-a" href="#" data-toggle="popover" data-placement="top" data-content="下のフォームは次回の週報です"><span class="glyphicon glyphicon-question-sign"></span></a>
-  </h1>
+<% if @weekly_report.reported_time %>
+  <% content_for :nav_report_title do %>
+    <a class="navbar-brand" href="#">
+      <%= @weekly_report.reported_time.to_s(:report_title) %>の週報
+    </a>
+  <% end %>
+<% end %>
+
+<% if @weekly_report.reported_time > Time.now  %>
+  <h4>今週の週報はすでに書かれています
+    <a class="question-a" href="#" data-toggle="popover" data-placement="top" data-content="以下のフォームは来週の週報です">
+      <span class="glyphicon glyphicon-question-sign"></span>
+    </a>
+  </h4>
 <% end %>
 
 <%= render 'form' %>

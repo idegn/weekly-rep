@@ -1,9 +1,11 @@
 <% action_name = controller.action_name %>
 
-<% if action_name == 'group_index'%>
-  <h1><%= @group.name %>の週報</h1>
-<% elsif action_name == 'user_index'%>
-  <h1><%= @user.name %>の週報</h1>
-<% end %>
+<div class="reports_header">
+  <% if action_name == 'group_index'%>
+    <h3><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> <%= @group.name %>'s Reports</h3>
+  <% elsif action_name == 'user_index'%>
+    <h3><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> <%= @user.name %>'s Reports</h3>
+  <% end %>
+</div>
 
-<%= render partial: "common/reports", locals: { reports: @weekly_reports } %>
+<%= render partial: "reports", locals: { reports: @weekly_reports } %>
