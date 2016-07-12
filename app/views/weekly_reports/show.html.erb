@@ -1,29 +1,38 @@
-<div class="report">
-  <div class="report_header">
-    <div class="user_icon"><%= gravatar_for @weekly_report.user %></div>
+<% content_for :nav_report_title do %>
+  <a class="navbar-brand" href="#">
+    <%= @weekly_report.reported_time.to_s(:report_title) %>の週報
+  </a>
+<% end %>
 
-    <div class="report_info">
-      <div class="report_user"><%= link_to_users_weekly_reports(@weekly_report.user) %></div>
-      <div class="report_time"><%= @weekly_report.updated_at %></div>
+<div class="report_show">
+  <div class="report">
+    <div class="report_header">
+      <div class="user_icon"><%= gravatar_for @weekly_report.user %></div>
+
+      <div class="report_info">
+        <div class="report_user"><%= link_to_users_weekly_reports(@weekly_report.user) %></div>
+        <div class="report_time"><%= @weekly_report.updated_at %></div>
+      </div>
+
+      <% if current_user.owned_report?(@weekly_report) %>
+        <div class="report_edit">
+          <%= link_to '週報を編集', edit_weekly_report_path(@weekly_report), class: 'btn btn-default' %>
+        </div>
+      <% end %>
     </div>
 
-    <% if current_user.owned_report?(@weekly_report) %>
-      <div class="report_edit">
-        <%= link_to '週報を編集', edit_weekly_report_path(@weekly_report), class: 'btn btn-default' %>
+    <div class="report_body">
+      <%= @weekly_report.processed_content.html_safe %>
+    </div>
+  </div>
+</div>
 
+<% content_for :comment do %>
+  <div class="container container_full comment_list">
+    <div class="container container_restrict">
+      <div class="comments">
+        <%= render 'comments', comments: @comments, comment: @comment %>
       </div>
-    <% end %>
+    </div>
   </div>
-
-  <div class="report_title">
-    <%= @weekly_report.reported_time.to_s(:report_title) %>の週報
-  </div>
-
-  <div class="report_body">
-    <%= Qiita::Markdown::Processor.new.call(@weekly_report.content)[:output].to_s.html_safe %>
-  </div>
-</div>
-
-<div class="comments">
-  <%= render 'comments', comments: @comments, comment: @comment %>
-</div>
+<% end %>
