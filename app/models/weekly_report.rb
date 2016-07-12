@@ -4,7 +4,8 @@ class WeeklyReport < ActiveRecord::Base
   has_many :comments
   scope :ordered_reports, -> { where(published: true).order('reported_time DESC') }
 
-  after_commit :send_write_notification
+  after_create :send_write_notification
+  before_save :save_processed_content
 
   def setup(current_user)
     if current_user.reported_this_week?
@@ -22,5 +23,10 @@ class WeeklyReport < ActiveRecord::Base
       next if u == user
       NotificationMailer.write_notification(user, u).deliver_later
     end
+  end
+
+  def save_processed_content
+    processed_content = Qiita::Markdown::Processor.new.call(content)[:output].to_s
+    self.processed_content = processed_content
   end
 end

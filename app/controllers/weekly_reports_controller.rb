@@ -1,4 +1,6 @@
 class WeeklyReportsController < ApplicationController
+  layout 'application_report', only: [:show, :edit, :new]
+
   before_action :set_weekly_report, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :check_same_group, only: [:group_index, :user_index]

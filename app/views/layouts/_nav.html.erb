@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default">
-  <div class="container">
+<nav class="navbar navbar-default navbar">
+  <div class="container container_restrict">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
         <span class="icon-bar"></span>
@@ -8,6 +8,7 @@
       </button>
       <% if user_signed_in? && current_user.approved_user? %>
         <%= link_to current_user.group.name, root_path, class: 'navbar-brand' %>
+        <%= yield :nav_report_title %>
       <% else %>
         <%= link_to 'WeeklyRep', root_path, class: 'navbar-brand' %>
       <% end %>

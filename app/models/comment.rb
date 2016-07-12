@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :weekly_report
 
-  after_commit :send_comment_notification
+  after_create :send_comment_notification
 
   private
 
