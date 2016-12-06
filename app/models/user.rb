@@ -31,5 +31,4 @@ class User < ActiveRecord::Base
   def latest_draft
     weekly_reports.find_by(reported_time: group.latest_report_time, published: false)
   end
-
 end
