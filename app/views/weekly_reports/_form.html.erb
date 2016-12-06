@@ -15,7 +15,7 @@
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#form">本文</a></li>
       <li><a id="preview-tab" data-toggle="tab" href="#preview">プレビュー</a></li>
-      <% unless @previous_report.nil? %>
+      <% unless @previous_report_content.blank? %>
           <li><a data-toggle="tab" href="#previous">前回の週報</a></li>
       <% end %>
     </ul>
@@ -28,9 +28,11 @@
       <div id="preview" class="tab-pane fade report_preview">
       </div>
 
-      <div id="previous" class="tab-pane fade">
-          <%= render html: @previous_report.processed_content.html_safe unless @previous_report.nil? %>
-      </div>
+      <% unless @previous_report_content.blank? %>
+          <div id="previous" class="tab-pane fade">
+              <%= render html: @previous_report_content.html_safe %>
+          </div>
+      <% end %>
     </div>
 
     <%= f.hidden_field :reported_time %>
