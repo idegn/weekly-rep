@@ -31,4 +31,11 @@ class User < ActiveRecord::Base
   def latest_draft
     weekly_reports.find_by(reported_time: group.latest_report_time, published: false)
   end
+
+  def previous_report_content
+    prev_rep = weekly_reports.all.order(:reported_time).first
+    unless prev_rep.nil?
+      Qiita::Markdown::Processor.new.call(prev_rep.content)[:output].to_s.html_safe
+    end
+  end
 end

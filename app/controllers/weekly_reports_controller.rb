@@ -30,6 +30,7 @@ class WeeklyReportsController < ApplicationController
   def new
     @weekly_report = WeeklyReport.new
     @weekly_report.setup(current_user)
+    @prev_rep_content = current_user.previous_report_content
   end
 
   # GET /weekly_reports/1/edit
