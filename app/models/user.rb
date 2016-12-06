@@ -32,10 +32,4 @@ class User < ActiveRecord::Base
     weekly_reports.find_by(reported_time: group.latest_report_time, published: false)
   end
 
-  def previous_report_content
-    prev_rep = weekly_reports.all.order(:reported_time).first
-    unless prev_rep.nil?
-      prev_rep.processed_content.html_safe
-    end
-  end
 end
