@@ -22,7 +22,10 @@ class User < ActiveRecord::Base
   def reported_this_week?
     weekly_reports.find_by(reported_time: group.latest_report_time, published: true)
   end
-  alias latest_report reported_this_week?
+
+  def latest_report
+    weekly_reports.order(reported_time: :desc).first
+  end
 
   def next_draft
     weekly_reports.find_by(reported_time: group.next_report_time, published: false)
