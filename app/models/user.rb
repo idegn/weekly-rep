@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   def previous_report_content
     prev_rep = weekly_reports.all.order(:reported_time).first
     unless prev_rep.nil?
-      Qiita::Markdown::Processor.new.call(prev_rep.content)[:output].to_s.html_safe
+      prev_rep.processed_content.html_safe
     end
   end
 end
