@@ -13,7 +13,10 @@ class WeeklyReport < ActiveRecord::Base
     else
       self.reported_time = current_user.group.latest_report_time
     end
-    self.content = current_user.group.template
+
+    self.content = current_user.latest_report ?
+                     current_user.latest_report.content :
+                     current_user.group.template
   end
 
   private
