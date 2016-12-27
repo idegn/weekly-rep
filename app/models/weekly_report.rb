@@ -19,11 +19,11 @@ class WeeklyReport < ActiveRecord::Base
                      current_user.group.template
   end
 
-  def previous
+  def older_report
     user.weekly_reports.where('reported_time < ?', reported_time).order('reported_time desc').first
   end
 
-  def next
+  def newer_report
     user.weekly_reports.where('reported_time > ?', reported_time).order('reported_time asc').first
   end
 

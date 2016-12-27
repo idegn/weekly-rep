@@ -24,6 +24,8 @@ class WeeklyReportsController < ApplicationController
     @comment.weekly_report = @weekly_report
 
     @comments = @weekly_report.comments.includes(:user)
+    @older_report = @weekly_report.older_report
+    @newer_report = @weekly_report.newer_report
   end
 
   # GET /weekly_reports/new

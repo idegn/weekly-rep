@@ -29,14 +29,14 @@
 
 <nav class="text-center">
   <ul class="list-inline">
-  <% unless @weekly_report.previous.nil? %>
+  <% unless @older_report.nil? %>
     <li>
-      <%= link_to '前の週報', weekly_report_path(@weekly_report.previous.id) %>
+      <%= link_to '前の週報', weekly_report_path(@older_report) %>
     </li>
   <% end %>
-  <% unless @weekly_report.next.nil? %>
+  <% unless @newer_report.nil? %>
     <li>
-      <%= link_to '次の週報', weekly_report_path(@weekly_report.next.id) %>
+      <%= link_to '次の週報', weekly_report_path(@newer_report) %>
     </li>
   <% end %>
   </ul>
