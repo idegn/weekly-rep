@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711134645) do
+ActiveRecord::Schema.define(version: 20161227084843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20160711134645) do
     t.text     "processed_content"
   end
 
+  add_index "weekly_reports", ["created_at"], name: "index_weekly_reports_on_created_at", using: :btree
   add_index "weekly_reports", ["group_id"], name: "index_weekly_reports_on_group_id", using: :btree
   add_index "weekly_reports", ["user_id"], name: "index_weekly_reports_on_user_id", using: :btree
 

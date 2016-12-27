@@ -19,6 +19,14 @@ class WeeklyReport < ActiveRecord::Base
                      current_user.group.template
   end
 
+  def older_report
+    user.weekly_reports.where('reported_time < ?', reported_time).order('reported_time desc').first
+  end
+
+  def newer_report
+    user.weekly_reports.where('reported_time > ?', reported_time).order('reported_time asc').first
+  end
+
   private
 
   def send_write_notification
