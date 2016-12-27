@@ -27,6 +27,21 @@
   </div>
 </div>
 
+<nav class="text-center">
+  <ul class="list-inline">
+  <% unless @weekly_report.previous.nil? %>
+    <li>
+      <%= link_to '前の週報', weekly_report_path(@weekly_report.previous.id) %>
+    </li>
+  <% end %>
+  <% unless @weekly_report.next.nil? %>
+    <li>
+      <%= link_to '次の週報', weekly_report_path(@weekly_report.next.id) %>
+    </li>
+  <% end %>
+  </ul>
+</nav>
+
 <% content_for :comment do %>
   <div class="container container_full comment_list">
     <div class="container container_restrict">
