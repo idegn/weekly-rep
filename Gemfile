@@ -44,6 +44,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'timecop', '~> 0.8.1'
+  gem 'rails-controller-testing'
 end
 
 group :development do
