@@ -5,12 +5,6 @@ class WeeklyReportsControllerTest < ActionController::TestCase
     @weekly_report = weekly_reports(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:weekly_reports)
-  end
-
   test "should get new" do
     get :new
     assert_response :success
